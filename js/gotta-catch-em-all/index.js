@@ -6,34 +6,44 @@
 
 // tutaj złapiemy sekcję, do której będziemy dodawać pokemony
 const pokemonsContainer = document.querySelector(".pokemons");
+const selectedTypes = document.querySelectorAll("form label input");
+const nameInput = document.querySelector("#pokemon-name");
 
 function renderPokemons(pokemons) {
-  // uzupełnij tutaj
+  pokemonsContainer.innerHTML = `<div class="pokemon-header"><p>Image</p> <p>Name</p> <p>Types</p></div>`;
+  pokemons.map(({ name, types, image }) => {
+    const pokemon = `<div class="pokemon-item"><img  src='${image}'/> <p> ${name}</p> <p> ${types.join(", ")}</p></div>`;
+    pokemonsContainer.innerHTML += pokemon;
+  });
 }
-
+renderPokemons(pokemons);
 // następnie wykonaj uzupełnioną metodę z tablicą pokemons, aby sprawdzić czy wszystko działa
 // renderPokemons(pokemons);
 
 /*
-  2. Przeglądanie całej listy pokemonów może okazać się trochę uciążliwe. Fajnie byłoby skorzystać z filtrów, które już znajdują sie w pliku html. 
+  2. Przeglądanie całej listy pokemonów może okazać się trochę uciążliwe. Fajnie byłoby skorzystać z filtrów, które już znajdują sie w pliku html.
   Napisz ciało funkcji które pozwoli nam na:
   - filtrowanie po typie
   - filtrowanie po nazwie (wpisany fragment zawiera się w nazwie pokemona)
 */
 
 function filterPokemons(pokemons) {
-  // uzupełnij tutaj
-  // zwróć odfiltrowaną tablicę pokemonów
+  const filtersOn = [...selectedTypes].filter((s) => s.checked).map((filter) => filter.id);
+  let inputValue = nameInput.value.toLowerCase();
+
+  let filteredPokemons = pokemons.filter(({ types }) => types.some((n) => filtersOn.includes(n)));
+  filteredPokemons = filteredPokemons.filter(({ name }) => name.toLowerCase().includes(inputValue));
+  return filteredPokemons;
 }
 
 const form = document.querySelector("form");
 
 function submitForm(event) {
   event.preventDefault();
+  const filteredPokemons = filterPokemons(pokemons);
   // następnie wykonaj uzupełnioną metodę z tablicą pokemons, aby sprawdzić czy wszystko działa
-  // renderPokemons(filterPokemons(pokemons));
+  renderPokemons(filteredPokemons);
 }
-
 form.addEventListener("submit", submitForm);
 
 /*

@@ -3,9 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  font-family: "Pokemon Solid", sans-serif;
+}
 
 h1 {
-  margin-bottom: 16px;
+  margin: 16px 0;
+  font-size: 36px;
+  text-align: center;
 }
 
 main {
@@ -25,8 +31,38 @@ label span {
 
 input {
   padding: 4px;
+  font-family: "Pokemon Solid", sans-serif;
 }
 
 button {
   padding: 4px;
+  font-family: "Pokemon Solid", sans-serif;
+}
+#form-filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemons {
+  margin-top: 4em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  background-color: #ffffff;
+  border-radius: 0.6em;
+}
+.pokemon-header {
+  padding: 1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 24px;
+}
+
+.pokemon-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pokemon-item p {
+  font-size: 20px;
 }
